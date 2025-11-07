@@ -1,1 +1,2 @@
-sdfasdf
+def func():
+    pass
