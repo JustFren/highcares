@@ -8,11 +8,11 @@ from difficulty_assessment import difficulty_assessment
 G = nx.Graph()
 
 def difficulty_weight(height,user_type,trail_type):
-    #trasy
-    #łatwa - e
-    #średnia - m
-    #trudna - h
-    #bardzo trudna -v
+    #routes
+    #easy - e
+    #medium - m
+    #hard - h
+    #very hard -v
     if user_type =="e":
         if trail_type == "e":
             mult = 1
@@ -62,8 +62,7 @@ def best_path(num_of_nodes,node_data,starting_point,user_type):
          G.add_node(i,data=node_data[i-1])
 
 
-    # v zamieniasz to na metode dodawania krawedzi
-    #v_data - idv id1 id2 wchodzenie schodzenie
+    #v_data - idv id1 id2 time_asc time_desc
     file=open("abs_elev.csv")
     csvfile = csv.reader(file)
     abs_elev=[]
@@ -95,12 +94,12 @@ def read_nodes_data():
     for lines in nodes_csv:
         data_core={}
         data_core["id"]=lines[0]
-        data_core["nazwa"]=lines[1]
+        data_core["name"]=lines[1]
         data_core["elevation"]=lines[2]   
         data.append(data_core)      
     return data
 
-def read_pogoda():
+def read_weather():
     plik=open("open-meteo-50.74N15.74E1587m.csv")
     pogoda=0
     csvPlik = csv.reader(plik)
@@ -110,15 +109,15 @@ def read_pogoda():
             break
     return pogoda    
     
-def print_pogoda(pogoda):
-    print("   relative humidity: "+pogoda[1]+"%")
-    print("   precipitation probability: "+pogoda[2]+"%")
-    print("   precipitation: "+pogoda[3]+" mm")
-    print("   pressure (mean sea level): "+pogoda[4]+" hPa")
-    print("   surface pressure: "+pogoda[5]+" hPa")
-    print("   visibility: "+pogoda[6]+" m")
-    print("   wind speed: "+pogoda[7]+" km/s")
-    print("   temperature: "+pogoda[8]+" °C")
+def print_weather(weather):
+    print("   relative humidity: "+weather[1]+"%")
+    print("   precipitation probability: "+weather[2]+"%")
+    print("   precipitation: "+weather[3]+" mm")
+    print("   pressure (mean sea level): "+weather[4]+" hPa")
+    print("   surface pressure: "+weather[5]+" hPa")
+    print("   visibility: "+weather[6]+" m")
+    print("   wind speed: "+weather[7]+" km/s")
+    print("   temperature: "+weather[8]+" °C")
 
 def get_path_names():
     name_path=[]       
@@ -130,7 +129,7 @@ user_diff = difficulty_assessment()[1]
 
 path=best_path(28,read_nodes_data(),2,user_diff)
 print("Weather:")
-print_pogoda(read_pogoda())
+print_weather(read_weather())
 print("Path is:")
 path_names=get_path_names()
 for i in range(len(path)):
