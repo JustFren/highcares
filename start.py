@@ -1,12 +1,13 @@
 import networkx as nx
 import matplotlib.pyplot as plt
-import random 
+import random
+import csv
+import requests 
 
 G = nx.Graph()
 
-def difficulty_weight():
-    out=1
-    return out
+def difficulty_weight(height):
+    return height
 
 
 def profil_wysokościowy(path):
@@ -22,7 +23,7 @@ def profil_wysokościowy(path):
     plt.show()
 
 
-def best_path(num_of_nodes,node_data,):
+def best_path(num_of_nodes,node_data):
     num_nodes = range(num_of_nodes)
     for i in num_nodes:
          G.add_node(i,data=node_data[i])
@@ -35,7 +36,7 @@ def best_path(num_of_nodes,node_data,):
                 t=random.choice(num_nodes)
                 while t==i:
                         t=random.choice(num_nodes)
-                G.add_edge(i,t,weight=1) # 1 zamieniasz na dowolna funkcje wagi
+                G.add_edge(i,t,weight=difficulty_weight()) # 1 zamieniasz na dowolna funkcje wagi
     
     #elist=G.edges
     #weightlist=nx.get_edge_attributes(G,"weight")
@@ -70,5 +71,19 @@ for i in range(28):
     data_core["rest of data"]=0   
     data.append(data_core)   
 #print(data)    
-temp=best_path(28,data)
-profil_wysokościowy(temp)
+#temp=best_path(28,data)
+#profil_wysokościowy(temp)
+plik=open("open-meteo-50.74N15.74E1587m.csv")
+
+pogoda=0
+csvPlik = csv.reader(plik)
+for lines in csvPlik:
+    if  lines[0][0] == '2':
+        pogoda =lines
+        break
+
+def print_pogoda(pogoda):
+    print("relative humidity: "+pogoda[1])    
+
+print_pogoda(pogoda)
+plik.close()
