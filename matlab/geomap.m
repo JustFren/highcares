@@ -1,4 +1,4 @@
-[A, R] = readgeoraster("geo8.tiff", OutputType="double");
+[A, R] = readgeoraster("pht_norm.tiff", OutputType="double");
 Agray = rgb2gray(A); % konwersja RGB → grayscale
 format long
 latlim = R.LatitudeLimits;
@@ -10,7 +10,7 @@ geoshow(A, R, "DisplayType", "texturemap");
 colormap(gray);
 %colorbar;
 
-file="A.xlsx";
+file="MatlabData.xlsx";
 lat0 = readmatrix(file,'Sheet', "Arkusz1", 'Range', 'C2:C29');
 lon0 = readmatrix(file,'Sheet',  "Arkusz1", 'Range', 'D2:D29');
 
