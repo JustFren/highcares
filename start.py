@@ -83,7 +83,15 @@ for lines in csvPlik:
         break
 
 def print_pogoda(pogoda):
-    print("relative humidity: "+pogoda[1])    
+    print("relative humidity: "+pogoda[1]+"%")
+    print("precipitation probability: "+pogoda[2]+"%")
+    print("precipitation: "+pogoda[3]+" mm")
+    print("pressure (mean sea level): "+pogoda[4]+" hPa")
+    print("surface pressure: "+pogoda[5]+" hPa")
+    print("visibility: "+pogoda[6]+" m")
+    print("wind speed: "+pogoda[7]+" km/s")
+    print("temperature: "+pogoda[8]+" °C")
+
 
 print_pogoda(pogoda)
 plik.close()
