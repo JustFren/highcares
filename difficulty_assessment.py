@@ -128,17 +128,19 @@ def difficulty_assessment():
 
 
 
-
+    print("Difficulty category: ", end="")
     if 0 <= difficulty <= 39:
-        category = "Easy"
+        category = "e" #easy
+        print("easy")
     elif 40 <= difficulty <= 79:
-        category = "Medium"
+        category = "m" #medium
+        print("medium")
     elif 80 <= difficulty <= 119:
-        category = "Hard"
+        category = "h" #hard
+        print("hard")
     else:
-        category = "Very Hard"
-
-    print("Difficulty category:", category)
+        category = "v" #very hard
+        print("very hard")
     return difficulty, category
 if __name__ == "__main__":
     difficulty_assessment()
