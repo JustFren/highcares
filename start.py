@@ -6,9 +6,16 @@ import requests
 
 G = nx.Graph()
 
+file=open("abs_elev.csv")
+csvfile = csv.reader(file)
+abs_elev=[]
+for lines in csvfile:
+    abs_elev.append(lines)
+
+print(abs_elev)
+
 def difficulty_weight(height):
     return height
-
 
 def profil_wysokościowy(path):
     fig, ax = plt.subplots()
@@ -29,19 +36,12 @@ def best_path(num_of_nodes,node_data):
          G.add_node(i,data=node_data[i])
 
     # v zamieniasz to na metode dodawania krawedzi
-    choices = random.choices(range(100),k=num_of_nodes*10) # maks 10 polaczen na wierzcholek 
-    for i in num_nodes:
-        for j in range(0+10*i,10+10*i):
-            if choices[j]%10-4<0: #40% wytworzenia polaczenia
-                t=random.choice(num_nodes)
-                while t==i:
-                        t=random.choice(num_nodes)
-                G.add_edge(i,t,weight=difficulty_weight()) # 1 zamieniasz na dowolna funkcje wagi
     
-    #elist=G.edges
-    #weightlist=nx.get_edge_attributes(G,"weight")
-    #pos = nx.spring_layout(G, seed=7)  # positions for all nodes - seed for reproducibility
-    
+
+
+
+
+
     path = nx.dijkstra_path(G,0,1)
     #print(path)
     

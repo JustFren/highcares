@@ -140,6 +140,6 @@ def difficulty_assessment():
 
     print("Difficulty category:", category)
     return difficulty, category
-
-difficulty_assessment()
+if __name__ == "__main__":
+    difficulty_assessment()
 
